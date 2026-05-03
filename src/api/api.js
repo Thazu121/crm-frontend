@@ -1,15 +1,17 @@
-import axios from "axios"
+import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://crm-backend-ulja.onrender.com"
-})
+  baseURL: import.meta.env.VITE_API_URL,
+});
 
 API.interceptors.request.use((req) => {
-  const token = localStorage.getItem("token")
-  if (token) {
-    req.headers.Authorization = `Bearer ${token}`
-  }
-  return req
-})
+  const token = localStorage.getItem("token");
 
-export default API
+  if (token) {
+    req.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return req;
+});
+
+export default API;
